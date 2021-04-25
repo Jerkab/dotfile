@@ -19,7 +19,7 @@ function mylink {
 }
 
 # List dot files
-DOTFILES=`cd $DIRBASE && ls -1 dit.*`
+DOTFILES=`cd $DIRBASE && ls -1 dot/*.el`
 if [ -z "$DOTFILES" ]; then
     echo "ERROR: No dot file found"
     exit 1;

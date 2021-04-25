@@ -1,5 +1,7 @@
 ;;;; package --- summary Contigugration des themes
+;;;; commentary:
 
+;;; Code:
 					; Custom file
 (setq custom-file "~/.elisp.d/emacs-custom.el")
 (when (file-exists-p "~/.elisp.d/emacs-custom.el")
@@ -11,39 +13,56 @@
                                         ; Configuration de l'affichage
 (if (display-graphic-p)
     (progn
-      (set-default-font "Inconsolata 11")
+      ;;(set-default-font "Inconsolata 11")
       (menu-bar-mode -1)
       (tool-bar-mode -1)
       ;; (scroll-bar-mode -1)
+      (cua-mode 0)
       (setq-default frame-title-format '("%f [%m]"))
-      (customize-set-variable 'solarized-termcolors 256)
-      (set-terminal-coding-system 'iso-8859-1)
-      ;;      (speedbar t)
+      ;;(customize-set-variable 'solarized-termcolors 256)
+      ;;(set-terminal-coding-system 'iso-8859-1)
+      ;;(speedbar t)
 
-      (use-package all-the-icons)
-;;      (use-package doom-themes
-;;        :config
-;;        ;; Global settings (defaults)
-;;        (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;              doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;        (load-theme 'doom-opera t)
-;;
-;;        ;; Enable flashing mode-line on errors
-;;        (doom-themes-visual-bell-config)
-;;        
-;;        ;; Enable custom neotree theme (all-the-icons must be installed!)
-;;        (doom-themes-neotree-config)
-;;        ;; or for treemacs users
-;;        (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-;;        (doom-themes-treemacs-config)
-;;        
-;;        ;; Corrects (and improves) org-mode's native fontification.
-;;        (doom-themes-org-config))
+                                        ; Color Theme
+      ;; (use-package solarized-theme)
+      ;;   :config
+      ;;   ;;(load-theme 'solarized-dark t)
+      ;;   (let ((line (face-attribute 'mode-line :underline)))
+      ;;     (set-face-attribute 'mode-line          nil :overline   line)
+      ;;     (set-face-attribute 'mode-line-inactive nil :overline   line)
+      ;;     (set-face-attribute 'mode-line-inactive nil :underline  line)
+      ;;     (set-face-attribute 'mode-line          nil :box        nil)
+      ;;     (set-face-attribute 'mode-line-inactive nil :box        nil)
+      ;;     (set-face-attribute 'mode-line-inactive nil :background "#f9f2d9")))
+      
+      ;; (load-theme 'doom-solarized-light)
+      
+      (require 'all-the-icons)
+                                        ; Modeline
 
-      (use-package doom-modeline
-        :ensure t
-        :hook (after-init . doom-modeline-mode))
+      (global-anzu-mode +1)
 
+      ;;; Simple modeline
+      (require 'simple-modeline)
+      (simple-modeline-mode)
+      
+      ;;; Redefine function
+      ;; (defun simple-modeline-segment-major-mode ()
+      ;;   "Displays the current major mode in the mode-line."
+      ;;   (list (propertize (concat " " (all-the-icons-icon-for-mode major-mode))
+      ;;                     'help-echo (format "Major-mode: `%s'" major-mode)
+      ;;                     'display '(raise 0)
+      ;;                     'face `(:height 1.1
+      ;;                                     :family ,(all-the-icons-icon-family-for-mode major-mode)
+      ;;                                     :inherit))
+      ;;         (propertize
+      ;;          (concat " "
+      ;;                  (or (and (boundp 'delighted-modes)
+      ;;                           (cadr (assq major-mode delighted-modes)))
+      ;;                      (format-mode-line mode-name)))
+      ;;          'face 'bold)))
+
+                                        ; Tabs bar
       (use-package centaur-tabs
         :demand
         :config
@@ -51,8 +70,9 @@
         :bind
         ("C-<prior>" . centaur-tabs-backward)
         ("C-<next>" . centaur-tabs-forward))
-      (cua-mode 0)
-      (load-theme 'solarized-light))
+      )
+
+                                        ; Non graphics
   (progn
     (menu-bar-mode -1)
     ;;(tool-bar-mode -1)
@@ -62,3 +82,7 @@
     ;;(customize-set-variable 'solarized-termcolors 256)
     ;;(load-theme 'solarized-dark t)
     ))
+
+
+;(provide 'config-theme)
+;;; config-theme.el ends here

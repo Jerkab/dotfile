@@ -92,8 +92,6 @@
 
                                         ; Ivy
 (load "~/.emacs.d/config-ivy.el")
-                                        ; Helm
-;;(load "~/.emacs.d/config-helm.el")
                                         ; Which-key
 (use-package which-key
   :ensure t
@@ -110,19 +108,6 @@
   (add-to-list 'load-path "~/.elisp.d/")
   (when (file-exists-p "~/.elisp.d/elisp.el")
     (load "~/.elisp.d/elisp.el")))
-
-
-;; A Dispatcher dans les bon fichier de configuration
-
-(require 'org-bullets)
-(add-hook 'org-mode-hook 'org-bullets-mode)
-
-;; highlight-indentation-mode
-;; (require 'indent-guide)
-
-;; (require move-text)
-;; (move-text-default-bindings)
-
 
 ;;; init.el
 
